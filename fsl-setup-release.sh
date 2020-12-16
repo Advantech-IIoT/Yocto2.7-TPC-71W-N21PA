@@ -194,6 +194,13 @@ if [ -d ../sources/meta-wise710a1-warrior ]; then
   fi
 fi
 
+if [ -d ../sources/meta-advantech ]; then
+  echo "BBLAYERS += \" \${BSPDIR}/sources/meta-advantech \"" >> $BUILD_DIR/conf/bblayers.conf
+  if [ -d ../sources/meta-advantech/meta-bsp-patch ]; then
+    echo "BBLAYERS += \" \${BSPDIR}/sources/meta-advantech/meta-bsp-patch \"" >> $BUILD_DIR/conf/bblayers.conf
+  fi
+fi
+
 cd  $BUILD_DIR
 clean_up
 unset FSLDISTRO
