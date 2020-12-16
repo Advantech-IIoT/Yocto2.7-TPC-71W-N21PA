@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <default sync-j="2" clone-depth="1"/>
+
+  <remote fetch="{{manifestserver}}" name="advantechralph"/>
+
+  <project name=".git" path="sources/meta-wise710a1-warrior" remote="advantechralph" revision="meta/wise710a1-warrior" clone-depth="1"/>
+  <project name=".git" path="wise710a1-warrior" remote="advantechralph" revision="project/wise710a1-warrior" clone-depth="1">
+    <linkfile dest="fsl-setup-release.sh" src="fsl-setup-release.sh"/>
+    <linkfile dest="setup-environment" src="setup-environment"/>
+    <linkfile dest="README-IMXBSP" src="README-IMXBSP"/>
+    <linkfile dest="README" src="README-yocto"/>
+  </project>
+
+</manifest>
