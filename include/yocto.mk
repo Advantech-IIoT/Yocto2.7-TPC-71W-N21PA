@@ -8,7 +8,7 @@ $(builddir)/.yocto: \
 	$(builddir)/.extra_local_conf_yocto
 
 $(builddir)/.repo_init_yocto: 
-	@cd $(yoctodir) && $(repobin) init -u $(currdir) -m $(yoctomanifest)
+	@cd $(yoctodir) && $(repobin) init -u $(currdir) -b $(shell git branch  | grep -s "^* " | sed -e "s/^\* //") -m $(yoctomanifest)
 	@sed -i $(yoctodir)/.repo/manifest.xml -e "s%{{manifestserver}}%file://$(currdir)%g"
 	@sed -i $(yoctodir)/.repo/manifest.xml -e "s%{{gitserver}}%file://$(builddir)/gitserver%g"
 	@touch $@
