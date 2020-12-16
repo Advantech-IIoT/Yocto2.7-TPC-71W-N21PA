@@ -8,7 +8,8 @@ yoctodir=$(builddir)/yocto
 # yoctomanifest=test.xml
 yoctomanifest=local.xml
 # yoctomachine=imx6dlwise710a1
-yoctomachine=imx6qsabresd
+# yoctomachine=imx6qsabresd
+yoctomachine=imx6qtpc71wn21pa
 yoctobuilddir=build.$(yoctomachine)
 yoctodistro=fsl-imx-x11
 

@@ -16,7 +16,7 @@
   <remote fetch="{{gitserver}}/rust" name="rust"/>
   <remote fetch="{{gitserver}}/CAF" name="CAF"/>
 
-  <project name="yocto" path="sources/meta-advantech" remote="advantechralph" revision="meta/advantech"/>
+  <project name="yocto" path="sources/meta-advantech" remote="advantechralph" revision="meta/tpc71wn21pa-warrior"/>
 <!--
   <project name="yocto" path="wise710a1-warrior" remote="advantechralph" revision="project/wise710a1-warrior">
     <linkfile dest="fsl-setup-release.sh" src="fsl-setup-release.sh"/>
