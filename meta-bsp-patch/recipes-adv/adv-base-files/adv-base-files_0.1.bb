@@ -21,13 +21,25 @@ RDEPENDS_${PN} += " \
   libxml2 \
   nodejs \
   nodejs-npm \
-  node-red \
-  node-red-contrib-modbus \
   e2fsprogs-resize2fs \
   i2c-tools \
   mtd-utils \
   usbutils \
 "
+
+# RDEPENDS_${PN} += " \
+#   bash \
+#   expect \
+#   libxml2 \
+#   nodejs \
+#   nodejs-npm \
+#   node-red \
+#   node-red-contrib-modbus \
+#   e2fsprogs-resize2fs \
+#   i2c-tools \
+#   mtd-utils \
+#   usbutils \
+# "
 
 inherit useradd
 
