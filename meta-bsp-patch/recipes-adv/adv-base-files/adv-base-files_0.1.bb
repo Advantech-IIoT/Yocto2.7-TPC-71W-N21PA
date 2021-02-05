@@ -21,37 +21,25 @@ RDEPENDS_${PN} += " \
   libxml2 \
   nodejs \
   nodejs-npm \
+  node-red \
+  node-red-contrib-modbus \
   e2fsprogs-resize2fs \
   i2c-tools \
   mtd-utils \
   usbutils \
 "
 
-# RDEPENDS_${PN} += " \
-#   bash \
-#   expect \
-#   libxml2 \
-#   nodejs \
-#   nodejs-npm \
-#   node-red \
-#   node-red-contrib-modbus \
-#   e2fsprogs-resize2fs \
-#   i2c-tools \
-#   mtd-utils \
-#   usbutils \
+# inherit useradd
+# 
+# USERADD_PACKAGES = "${PN}"
+# 
+# GROUPADD_PARAM_${PN} = " \
+#   -g 1000 advantech; \
 # "
-
-inherit useradd
-
-USERADD_PACKAGES = "${PN}"
-
-GROUPADD_PARAM_${PN} = " \
-  -g 1000 advantech; \
-"
-
-USERADD_PARAM_${PN} = "\
-  -u 1000 -g advantech -d /home/advantech -m -s /bin/sh advantech; \
-"
+# 
+# USERADD_PARAM_${PN} = "\
+#   -u 1000 -g advantech -d /home/advantech -m -s /bin/sh advantech; \
+# "
 
 do_install(){
     install -d ${D}${sysconfdir}/systemd/network
