@@ -33,4 +33,18 @@ SCMVERSION = "n"
 endef 
 export extra_local_conf_str
 
+YOCTO_WORK_DIR_CHK=$(shell if [ -f "$(yoctodir)/$(yoctobuilddir)/conf/extra-local.conf" ] ; then eval $$(cat $(yoctodir)/$(yoctobuilddir)/conf/extra-local.conf | grep -s DL_DIR | sed "s/ *= */=/") ; echo $$DL_DIR | sed -e 's/\/downloads$$//'; fi)
+ifneq ($(YOCTO_WORK_DIR_CHK),)
+yoctoworkdir=$(YOCTO_WORK_DIR_CHK)
+else
+yoctoworkdir=$(yoctodir)/$(yoctobuilddir)
+endif
+
+fsl-image-qt5=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/fsl-image-qt5-$(yoctomachine).sdcard)
+core-image-full-cmdline=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/core-image-full-cmdline-$(yoctomachine).sdcard)
+SPL=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/SPL)
+u-boot_crc.bin=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/u-boot_crc.bin)
+u-boot_crc.bin.crc=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/u-boot_crc.bin.crc)
+sdcardrootfs=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/fsl-image-qt5-$(yoctomachine).tar.bz2)
+sdcardimage=fsl-image-qt5
 
