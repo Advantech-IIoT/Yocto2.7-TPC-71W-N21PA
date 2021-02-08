@@ -28,6 +28,7 @@ SSTATE_DIR = "$(YOCTO_WORK_DIR)/sstate-cache"
 CORE_IMAGE_EXTRA_INSTALL += " adv-base-files kernel-modules "
 EXTRA_IMAGE_FEATURES += " package-management "
 DISTRO_FEATURES_remove = " optee "
+FEATURE_INSTALL_remove=" psplash "
 UBOOT_CONFIG += "1G"
 SCMVERSION = "n"
 endef 
@@ -45,6 +46,7 @@ core-image-full-cmdline=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(
 SPL=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/SPL)
 u-boot_crc.bin=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/u-boot_crc.bin)
 u-boot_crc.bin.crc=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/u-boot_crc.bin.crc)
-sdcardrootfs=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/fsl-image-qt5-$(yoctomachine).tar.bz2)
+sdcardrootfs=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/fsl-image-qt5-$(yoctomachine).tar.gz)
 sdcardimage=fsl-image-qt5
+yoctosdkdir=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/sdk)
 
