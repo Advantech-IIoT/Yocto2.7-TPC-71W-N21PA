@@ -1,9 +1,10 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "file://0001-config-and-dts.patch \
-            file://0001-mcu-watchdog.patch \
-            file://0001-fec-clock.patch \
-            file://0001-rtl8211f.patch \
-            file://0001-mcu-reboot.patch \
+            file://0002-mcu-watchdog.patch \
+            file://0003-fec-clock.patch \
+            file://0004-rtl8211f.patch \
+            file://0005-mcu-reboot.patch \
+            file://0006-io-reset.patch \
             "
 LOCALVERSION = ""
