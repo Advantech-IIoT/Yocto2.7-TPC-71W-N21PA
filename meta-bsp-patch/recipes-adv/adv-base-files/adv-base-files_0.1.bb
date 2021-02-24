@@ -61,7 +61,7 @@ do_install(){
     install -m 0644 ${WORKDIR}/gpio-export.service ${D}${sysconfdir}/systemd/system
     install -m 0644 ${WORKDIR}/direct-powerdown.service ${D}${sysconfdir}/systemd/system
     install -m 0644 ${WORKDIR}/stress-reboot.service ${D}${sysconfdir}/systemd/system
-    ln -sf /etc/systemd/system/swap-eth.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/swap-eth.service
+#    ln -sf /etc/systemd/system/swap-eth.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/swap-eth.service
     ln -sf /etc/systemd/system/com-rs.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/com-rs.service
     ln -sf /etc/systemd/system/gpio-export.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/gpio-export.service
     ln -sf /etc/systemd/system/direct-powerdown.service ${D}${sysconfdir}/systemd/system/poweroff.target.wants/direct-powerdown.service
