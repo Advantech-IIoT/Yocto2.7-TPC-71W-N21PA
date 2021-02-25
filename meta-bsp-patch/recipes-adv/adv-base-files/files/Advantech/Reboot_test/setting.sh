@@ -48,6 +48,8 @@ while true; do
   shift
 done
 
+[ x"$HOME" == x ] && HOME=/home/root
+
 start_func(){
   rm -rf ${HOME}/{CONFIG,LOG}
   systemctl enable stress-reboot

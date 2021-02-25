@@ -1,6 +1,7 @@
 #!/bin/bash
   
 settime=40
+[ x"$HOME" == x ] && HOME=/home/root
 pslog=${HOME}/LOG/ps.log
 systemctllog=${HOME}/LOG/systemctl.log
 systemstatuslog=${HOME}/LOG/systemstatus.log
