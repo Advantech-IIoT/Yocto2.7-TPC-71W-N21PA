@@ -1,0 +1,3 @@
+.PHONY: usage
+usage: 
+	@echo $@
