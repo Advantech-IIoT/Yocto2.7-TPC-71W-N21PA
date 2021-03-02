@@ -49,4 +49,7 @@ u-boot_crc.bin.crc=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yocto
 sdcardrootfs=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/fsl-image-qt5-$(yoctomachine).tar.gz)
 sdcardimage=fsl-image-qt5
 yoctosdkdir=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/sdk)
+kernelimage=$(shell realpath -m $(yoctoworkdir)/tmp/deploy/images/$(yoctomachine)/zImage)
 
+# for bsp
+modelname:=tpc71wn21pa

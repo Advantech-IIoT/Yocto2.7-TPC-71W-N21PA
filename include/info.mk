@@ -13,4 +13,5 @@ info:
 	@printf "%-30s: %s\n" "u-boot_crc.bin" "$(u-boot_crc.bin)"
 	@printf "%-30s: %s\n" "u-boot_crc.bin.crc" "$(u-boot_crc.bin.crc)"
 	@printf "%-30s: %s\n" "sdcardrootfs" "$(sdcardrootfs)"
+	@printf "%-30s: %s\n" "kernelimage" "$(kernelimage)"
 	@printf "%-30s: %s\n" "sdk" "$(shell find $(yoctosdkdir) -name "*.sh")"
