@@ -35,10 +35,12 @@ ifdef YOCTO_WORK_DIR
 endif
 	@ln -sf $(scriptsdir)/env-creator $(yoctodir)/$(yoctobuilddir)
 	@touch $(yoctodir)/$(yoctobuilddir)/conf/sanity.conf
+	@touch $@
 
 $(yoctodir)/.extra_local_conf_yocto: 
 	@rm -rf $(yoctodir)/$(yoctobuilddir)/conf/extra-local.conf
 	@echo "$${extra_local_conf_str}" > $(yoctodir)/$(yoctobuilddir)/conf/extra-local.conf 
+	@touch $@
 
 .PHONY: yoctodir
 yoctodir: $(yoctodir)

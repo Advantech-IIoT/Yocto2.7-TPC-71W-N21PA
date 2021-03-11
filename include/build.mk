@@ -4,11 +4,11 @@ build_%:
 build_e_%: 
 	@make $(builddir)/.$@
 
-$(builddir)/.build_%:
+$(builddir)/.build_%: yocto
 	@bitbake_target=$$(echo "$$(basename $(@))" | sed -e "s/.build_//"); \
          cd $(yoctodir) && source setup-environment $(yoctobuilddir) && bitbake $${bitbake_target}; 
 
-$(builddir)/.build_e_%:
+$(builddir)/.build_e_%: yocto
 	@bitbake_target=$$(echo "$$(basename $(@))" | sed -e "s/.build_e_//"); \
          cd $(yoctodir) && source setup-environment $(yoctobuilddir) && bitbake -e $${bitbake_target}; 
 
