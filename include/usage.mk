@@ -28,6 +28,8 @@ Usage:
       linux-imx                      Build linux-imx
       writesdcard                    Write image to SDCARD.
       writesdcardremote              Write image to SDCARD on remote device.
+      clean                          Clean 'build/yocto' folder. 
+	  distclean                      Clean 'build' folder. 
                                                                
     parameter:                                                 
                                                                

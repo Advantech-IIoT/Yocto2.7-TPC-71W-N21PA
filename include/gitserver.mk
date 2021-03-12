@@ -6,11 +6,11 @@ $(builddir)/.gitserver: $(builddir)/.fetch_gitserver
 
 $(builddir)/.fetch_gitserver: 
 	@if [ x"$(gitserver)" != "x" ] ; then \
-           ln -sf $(gitserver) $(builddir)/gitserver; \
-         else \
-           mkdir -p $(builddir)/gitserver; \
+       ln -sf $(gitserver) $(builddir)/gitserver; \
+     else \
+       mkdir -p $(builddir)/gitserver; \
 	   cd $(builddir)/gitserver; \
 	   $(scriptsdir)/fetch-gitserver.sh; \
-         fi
+     fi
 	@touch $@
 
