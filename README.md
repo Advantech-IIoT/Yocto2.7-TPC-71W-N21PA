@@ -1,7 +1,7 @@
-# [Yocto Local Repository Project](https://advantechralph.github.io/yocto-local/)
+# [Yocto Local Repository Project](https://github.com/Advantech-IIoT/Yocto2.7-TPC-71W-N21PA/)
 ---
 
-- [TPC-71W-N21PA](https://advantechralph.github.io/documents/tpc71wn21pa/tpc71wn21pa-yocto2.7.html)
+- [TPC-71W-N21PA](https://github.com/Advantech-IIoT/Yocto2.7-TPC-71W-N21PA/wiki)
 
 ---
 ###### tags: `docs` `yocto`
