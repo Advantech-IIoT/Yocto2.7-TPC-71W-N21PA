@@ -1,0 +1,100 @@
+From 8b4d007e2abecf34c9ce9466d21e40768f23c180 Mon Sep 17 00:00:00 2001
+From: "yao.kang" <yao.kang@advantech.com.cn>
+Date: Tue, 27 Jul 2021 13:34:49 +0800
+Subject: [PATCH] update-poweroff-problem
+
+---
+ drivers/power/reset/syscon-poweroff.c | 10 +++++++++-
+ drivers/watchdog/watchdog_advantech.c | 22 +++++++++++++++++++++-
+ include/linux/proc-board.h            |  3 +++
+ 3 files changed, 33 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/power/reset/syscon-poweroff.c b/drivers/power/reset/syscon-poweroff.c
+index f9f1cb54fbf9..af209592b091 100644
+--- a/drivers/power/reset/syscon-poweroff.c
++++ b/drivers/power/reset/syscon-poweroff.c
+@@ -26,6 +26,10 @@
+ #include <linux/pm.h>
+ #include <linux/regmap.h>
+ 
++#ifdef CONFIG_ARCH_ADVANTECH
++#include <linux/proc-board.h>
++#endif
++
+ static struct regmap *map;
+ static u32 offset;
+ static u32 value;
+@@ -37,8 +41,12 @@ static void syscon_poweroff(void)
+ 	regmap_update_bits(map, offset, mask, value);
+ 
+ 	mdelay(1000);
++	#ifdef CONFIG_ARCH_ADVANTECH
++	// all job finished, direct power-off using wdt power-off
++	wdt_power_off();
++	#endif
+ 
+-	pr_emerg("Unable to poweroff system\n");
++	//pr_emerg("Unable to poweroff system\n");
+ }
+ 
+ static int syscon_poweroff_probe(struct platform_device *pdev)
+diff --git a/drivers/watchdog/watchdog_advantech.c b/drivers/watchdog/watchdog_advantech.c
+index f2bef1c71106..f3b11f4091ef 100755
+--- a/drivers/watchdog/watchdog_advantech.c
++++ b/drivers/watchdog/watchdog_advantech.c
+@@ -57,6 +57,13 @@
+ #define REG_WDT_VERSION 					0x27
+ #define REG_WDT_POWER_BTN_MODE 		0x28
+ 
++//ref: doc/Watchdog_functional_description_V23_0801.pdf
++//It is special case for direct timeout. default value:0x0
++#define REG_WDT_DIRECT_TIME_OUT		0x29
++
++//It is used MCU to direct power off. default value:0x0
++#define REG_WDT_DIRECT_POWER_OFF	0x30
++
+ static int gpio_wdt_en;
+ static int gpio_wdt_ping;
+ static int gpio_wdt_out;
+@@ -97,6 +104,19 @@ struct watchdog_info adv_wdt_info = {
+ 	.firmware_version = 0,
+ };
+ 
++#ifdef CONFIG_ARCH_ADVANTECH
++// direct power-off
++// we use i2c command:0x30 value:0x1 to cut-off power from watchdog
++void wdt_power_off(void)
++{
++	int ret=-1;
++	if((ret=i2c_smbus_write_word_data(adv_client, (u8)REG_WDT_DIRECT_POWER_OFF, (u16)0x0001))!=0){
++		printk("%s, %d: ERROR!! ret: %d\n", __FUNCTION__, __LINE__, ret);
++		return 0;
++	}
++}
++#endif
++
+ #if 0
+ static int adv_wdt_i2c_write_reg(struct i2c_client *client, u8 reg, void *buf, size_t len)
+ {
+@@ -394,7 +414,7 @@ static int adv_wdt_restart_handle(struct notifier_block *this, unsigned long mod
+ 		mdelay(2000);
+ 	}else{
+ 		dev_info(adv_wdt_miscdev.parent, "%s, %d: use MCU direct timeout function\n", __FUNCTION__, __LINE__);
+-		i2c_smbus_write_word_data(adv_client, (u8)0x29, (u16)0x0001); 
++		i2c_smbus_write_word_data(adv_client, (u8)REG_WDT_DIRECT_TIME_OUT, (u16)0x0001);
+ 		dev_info(adv_wdt_miscdev.parent, "%s, %d: wait for MCU to trigger reboot...\n", __FUNCTION__, __LINE__);
+ 		while (true)
+ 			;
+diff --git a/include/linux/proc-board.h b/include/linux/proc-board.h
+index c2253036e071..dbd30d1aac55 100644
+--- a/include/linux/proc-board.h
++++ b/include/linux/proc-board.h
+@@ -50,5 +50,8 @@ extern char board_cpu[20];
+ #define IS_EBC_RB01     ( strncmp(board_type,"EBC-RB01", 8)==0 ? 1 : 0)
+ #define IS_EBC_RB01_A1  ( strncmp(board_type,"EBC-RB01 A1", 11)==0 ? 1 : 0)
+ 
++// direct power-off in drivers/watchdog/watchdog_advantech.c
++void wdt_power_off(void);
++
+ #endif /* _LINUX_PROC_BOARD_H */
+ #endif /* CONFIG_ARCH_ADVANTECH */

@@ -9,6 +9,7 @@ SRC_URI += " \
   file://swap-eth.service \
   file://com-rs.service \
   file://gpio-export.service \
+  file://direct-powerdown.service \
   file://stress-reboot.service \
   file://sysctl.d \
 "
@@ -38,14 +39,7 @@ RDEPENDS_${PN} += " \
   g++-symlinks \
   can-utils \
   vim \
-  binutils \
-  packagegroup-core-tools-testapps \
-  tzdata \
-  modemmanager \
-  connman-tools \
-  networkmanager \ 
 "
-#  connman-tools 
 
 # inherit useradd
 # 
@@ -77,12 +71,12 @@ do_install(){
     install -m 0644 ${WORKDIR}/swap-eth.service ${D}${sysconfdir}/systemd/system
     install -m 0644 ${WORKDIR}/com-rs.service ${D}${sysconfdir}/systemd/system
     install -m 0644 ${WORKDIR}/gpio-export.service ${D}${sysconfdir}/systemd/system
+    install -m 0644 ${WORKDIR}/direct-powerdown.service ${D}${sysconfdir}/systemd/system
     install -m 0644 ${WORKDIR}/stress-reboot.service ${D}${sysconfdir}/systemd/system
-#    install -m 0644 ${WORKDIR}/direct-powerdown.service ${D}${sysconfdir}/systemd/system
 #    ln -sf /etc/systemd/system/swap-eth.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/swap-eth.service
 #    ln -sf /etc/systemd/system/com-rs.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/com-rs.service
 #    ln -sf /etc/systemd/system/gpio-export.service ${D}${sysconfdir}/systemd/system/multi-user.target.wants/gpio-export.service
-#    ln -sf /etc/systemd/system/direct-powerdown.service ${D}${sysconfdir}/systemd/system/poweroff.target.wants/direct-powerdown.service
+    ln -sf /etc/systemd/system/direct-powerdown.service ${D}${sysconfdir}/systemd/system/poweroff.target.wants/direct-powerdown.service
 }
 
 FILES_${PN} = " /etc/* /etc/systemd/network/* /etc/systemd/system/* /etc/systemd/system/multi-user.target.wants/* /etc/systemd/system/poweroff.target.wants/* "
@@ -94,3 +88,4 @@ FILES_${PN}-dev = ""
 # Prevents do_package failures with:
 # debugsources.list: No such file or directory:
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
+

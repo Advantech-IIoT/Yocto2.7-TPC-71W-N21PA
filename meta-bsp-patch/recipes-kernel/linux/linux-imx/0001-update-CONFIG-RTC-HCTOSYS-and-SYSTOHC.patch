@@ -1,0 +1,28 @@
+From 35c132cb981df5334adc0b4ad6d8ff7c282cd8ae Mon Sep 17 00:00:00 2001
+From: "yao.kang" <yao.kang@advantech.com.cn>
+Date: Fri, 23 Jul 2021 17:46:10 +0800
+Subject: [PATCH] update CONFIG RTC HCTOSYS and SYSTOHC
+
+---
+ arch/arm/configs/imx_v7_defconfig | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/arch/arm/configs/imx_v7_defconfig b/arch/arm/configs/imx_v7_defconfig
+index b91e3f0da03e..8ca6ba651fb5 100644
+--- a/arch/arm/configs/imx_v7_defconfig
++++ b/arch/arm/configs/imx_v7_defconfig
+@@ -372,7 +372,14 @@ CONFIG_LEDS_TRIGGER_ONESHOT=y
+ CONFIG_LEDS_TRIGGER_HEARTBEAT=y
+ CONFIG_LEDS_TRIGGER_BACKLIGHT=y
+ CONFIG_LEDS_TRIGGER_GPIO=y
++CONFIG_RTC_LIB=y
+ CONFIG_RTC_CLASS=y
++CONFIG_RTC_HCTOSYS=y
++CONFIG_RTC_SYSTOHC=y
++CONFIG_RTC_HCTOSYS_DEVICE="rtc0"
++CONFIG_RTC_INTF_SYSFS=y
++CONFIG_RTC_INTF_PROC=y
++CONFIG_RTC_INTF_DEV=y
+ CONFIG_RTC_INTF_DEV_UIE_EMUL=y
+ CONFIG_RTC_DRV_MC13XXX=y
+ CONFIG_RTC_DRV_MXC=y

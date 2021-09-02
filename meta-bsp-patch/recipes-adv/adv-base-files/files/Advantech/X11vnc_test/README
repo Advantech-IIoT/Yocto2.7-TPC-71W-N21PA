@@ -1,0 +1,36 @@
+#
+# x11vnc server start script
+#
+# Usage: ./start_x11vnc.sh
+#
+
+#
+# Config x11vnc powered up (apply to ubuntu systemd):
+#
+
+#
+# Step1: create /lib/systemd/system/x11vnc.service and write following content:
+#
+# If you need to log in with a password, please set ExecStart=/usr/bin/x11vnc -ncache 10 -forever -shared -capslock -rfbport 5900 -rfbauth /etc/x11vnc.pass -auth /var/run/lightdm/root/:0 -display :0
+# And create the x11vnc password config file '/etc/x11vnc.pass'.
+# 
+[Unit]
+Description=Start x11vnc at startup.
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/x11vnc -ncache 10 -forever -shared -capslock -rfbport 5900 -auth /var/run/lightdm/root/:0 -display :0
+
+[Install]
+WantedBy=multi-user.target
+
+#
+# Step2: Register with the systemd service list
+#
+sudo chmod 777 /lib/systemd/system/x11vnc.service 
+sudo systemctl enable x11vnc.service
+
+#
+# Step3: Reboot system
+#
