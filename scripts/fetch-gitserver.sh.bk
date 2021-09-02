@@ -1,6 +1,6 @@
 #!/bin/bash
-advantech_iiot=git://github.com/Advantech-IIoT
-advantech_iiot_names="Yocto2.7-TPC-71W-N21PA"
+advantechralph_url=.
+advantechralph_names="yocto"
 yocto_url=git://git.yoctoproject.org
 yocto_names="poky meta-freescale"
 community_url=git://github.com/Freescale
@@ -20,8 +20,8 @@ CAF_names="meta-fsl-bsp-release"
 
 list="yocto community oe OSSystems QT5 Timesys rust CAF"
 
-mkdir -p  advantech_iiot
-git clone --bare $(git rev-parse --show-toplevel) Advantech-IIoT/Yocto2.7-TPC-71W-N21PA
+mkdir -p  advantechralph
+git clone --bare $(git rev-parse --show-toplevel) advantechralph/yocto
 for l in $list ; do
   eval "url=\${${l}_url}"
   eval "names=\${${l}_names}"
