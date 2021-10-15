@@ -201,6 +201,13 @@ if [ -d ../sources/meta-advantech ]; then
   fi
 fi
 
+nm_flag=`cat $BUILD_DIR/../sources/meta-openembedded/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb | grep connman | awk '{print $3}'`
+if [ -d ../sources/meta-openembedded/meta-networking/recipes-connectivity/networkmanager ]; then
+    if [ -n ${nm_flag} ]; then
+       sed -e "/connman/d" -i $BUILD_DIR/../sources/meta-openembedded/meta-networking/recipes-connectivity/networkmanager/networkmanager_1.16.0.bb
+    fi
+fi
+
 cd  $BUILD_DIR
 clean_up
 unset FSLDISTRO
